@@ -1,20 +1,24 @@
-# <p align="center"><img src="assets/icon/app_icon.png" width="120" height="120" alt="Self Focus Pixel Icon" /><br>🐾 Self Focus Pixel</p>
-<p align="center">
-  <b>Retro 8-Bit Pomodoro Focus Timer & Virtual Pixel Pet Streaks</b><br>
-  <i>Xây dựng tính kỷ luật, nuôi lớn thú cưng ảo và giữ vững ngọn lửa thói quen mỗi ngày</i>
-</p>
+<div align="center">
 
-<p align="center">
-  <a href="https://github.com/maico-le/self-manegement-mb/actions/workflows/build_release.yml">
-    <img src="https://github.com/maico-le/self-manegement-mb/actions/workflows/build_release.yml/badge.svg" alt="Build Status" />
-  </a>
-  <img src="https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter" alt="Flutter 3" />
-  <img src="https://img.shields.io/badge/Style-Mistral%20Pixel%208--Bit-FA520F" alt="Pixel Style" />
-  <img src="https://img.shields.io/badge/Android-Desugaring%20Enabled-16A34A" alt="Android Desugaring" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" />
-</p>
+<img src="assets/icon/app_icon.png" width="128" height="128" alt="Self Focus Pixel Icon" />
+
+# 🐾 Self Focus Pixel
+### *Retro 8-Bit Pomodoro Focus Timer & Virtual Pixel Pet Streaks*
+*Xây dựng tính kỷ luật, nuôi lớn thú cưng ảo và giữ vững ngọn lửa thói quen mỗi ngày*
+
+[![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/maico-le/self-manegement-mb/releases)
+[![Version](https://img.shields.io/badge/Version-v1.0.0-FA520F?style=for-the-badge)](https://github.com/maico-le/self-manegement-mb/releases/latest)
+[![Style](https://img.shields.io/badge/Style-Mistral_Pixel_8--Bit-FFAF00?style=for-the-badge)](#)
+[![No Ads](https://img.shields.io/badge/Ads-100%25_Free-brightgreen?style=for-the-badge)](#)
+
+<br/>
+
+### 📲 [👉 TẢI NGAY BẢN CÀI ĐẶT APK CHO ANDROID (TRỰC TIẾP) 👈](https://github.com/maico-le/self-manegement-mb/releases/latest/download/app-release.apk)
+*Hoặc xem các bản cập nhật và changelog tại trang [GitHub Releases](https://github.com/maico-le/self-manegement-mb/releases).*
 
 ---
+
+</div>
 
 ## 🌟 Giới Thiệu
 
@@ -108,6 +112,14 @@ flutter test
 flutter build apk --release
 ```
 *File APK đầu ra nằm tại:* `build/app/outputs/flutter-apk/app-release.apk`
+
+---
+
+## 📥 Hướng Dẫn Cài Đặt Nhanh (Android)
+1. Nhấn tải file cài đặt: [**app-release.apk (Bản mới nhất)**](https://github.com/maico-le/self-manegement-mb/releases/latest/download/app-release.apk).
+2. Sau khi tải xong, nhấn mở file `.apk` và chọn **Cài đặt**.
+   *(Nếu hệ điều hành Android hỏi quyền, bật **Cho phép từ nguồn này** cho trình duyệt của bạn)*.
+3. Mở ứng dụng **Self Focus Pixel** và bắt đầu phiên tập trung Pomodoro đầu tiên!
 
 ---
 
