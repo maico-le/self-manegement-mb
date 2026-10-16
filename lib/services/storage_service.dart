@@ -59,6 +59,9 @@ class StorageService {
           targetMinutesPerDay: 30,
           colorHex: '#FA520F', // Mistral orange
           createdAt: DateTime.now(),
+          reminderHour: 17,
+          reminderMinute: 30,
+          reminderDays: const [1, 2, 3, 4, 5, 6, 7],
         ),
         HabitStreak(
           id: 'habit_english',
@@ -67,6 +70,9 @@ class StorageService {
           targetMinutesPerDay: 25,
           colorHex: '#0284C7', // Cyber blue
           createdAt: DateTime.now(),
+          reminderHour: 19,
+          reminderMinute: 30,
+          reminderDays: const [1, 2, 3, 4, 5, 6, 7],
         ),
         HabitStreak(
           id: 'habit_japanese',
@@ -75,6 +81,9 @@ class StorageService {
           targetMinutesPerDay: 25,
           colorHex: '#E11D48', // Crimson red
           createdAt: DateTime.now(),
+          reminderHour: 21,
+          reminderMinute: 0,
+          reminderDays: const [1, 2, 3, 4, 5, 6, 7],
         ),
       ];
       saveHabits(defaults);

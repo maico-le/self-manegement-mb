@@ -74,6 +74,52 @@ void main() {
       expect(completed.currentStreak, 1);
       expect(completed.bestStreak, 1);
     });
+
+    test('Habit reminder time and frequency display formatting', () {
+      final dailyHabit = HabitStreak(
+        id: 'habit_jp',
+        title: 'Học Japanese N3',
+        category: HabitCategory.japanese,
+        reminderHour: 19,
+        reminderMinute: 30,
+        reminderDays: const [1, 2, 3, 4, 5, 6, 7],
+        createdAt: DateTime.now(),
+      );
+
+      expect(dailyHabit.reminderTimeString, '19:30');
+      expect(dailyHabit.frequencyString, 'Hàng ngày');
+
+      final weekdayHabit = dailyHabit.copyWith(reminderDays: [1, 2, 3, 4, 5]);
+      expect(weekdayHabit.frequencyString, 'T2 - T6 (Ngày thường)');
+
+      final weekendHabit = dailyHabit.copyWith(reminderDays: [6, 7]);
+      expect(weekendHabit.frequencyString, 'T7 - CN (Cuối tuần)');
+
+      final customHabit = dailyHabit.copyWith(reminderDays: [1, 3, 5]);
+      expect(customHabit.frequencyString, 'T2, T4, T6');
+    });
+
+    test('Habit serialization preserves reminder properties', () {
+      final habit = HabitStreak(
+        id: 'habit_en',
+        title: 'Học English IELTS',
+        category: HabitCategory.english,
+        reminderHour: 21,
+        reminderMinute: 15,
+        isReminderEnabled: true,
+        reminderDays: const [1, 2, 3, 4, 5],
+        createdAt: DateTime.now(),
+      );
+
+      final json = habit.toJson();
+      final revived = HabitStreak.fromJson(json);
+
+      expect(revived.reminderHour, 21);
+      expect(revived.reminderMinute, 15);
+      expect(revived.isReminderEnabled, true);
+      expect(revived.reminderDays, [1, 2, 3, 4, 5]);
+      expect(revived.reminderTimeString, '21:15');
+    });
   });
 
   group('Workout ExerciseItem Tests', () {
