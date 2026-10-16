@@ -6,6 +6,7 @@ import '../../providers/pomodoro_provider.dart';
 import '../../providers/streak_provider.dart';
 import '../../widgets/pixel_icons.dart';
 import '../../widgets/pixel_widgets.dart';
+import '../workout_screen.dart';
 
 class StreaksTab extends ConsumerWidget {
   final Function(int tabIndex)? onNavigateTab;
@@ -262,6 +263,24 @@ class StreaksTab extends ConsumerWidget {
               ),
             ],
           ),
+          if (habit.category == HabitCategory.exercise) ...[
+            const SizedBox(height: 8),
+            PixelButton(
+              isSmall: true,
+              backgroundColor: const Color(0xFF0F172A),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const WorkoutScreen()));
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  PixelDumbbellIcon(size: 14),
+                  SizedBox(width: 8),
+                  Text('VÀO BÀI TẬP (PLANK, HÍT ĐẤT CÓ BÁO THỨC ⏰)'),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );

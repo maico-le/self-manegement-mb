@@ -3,11 +3,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/habit_streak_model.dart';
 import '../models/pet_model.dart';
 import '../models/pomodoro_model.dart';
+import '../models/workout_model.dart';
 
 class StorageService {
   static const String keyPet = 'pixel_pet_data';
   static const String keyHabits = 'habits_list_data';
   static const String keySessions = 'pomodoro_sessions_data';
+  static const String keyExercises = 'custom_exercises_data';
   static const String keyFocusMinutes = 'setting_focus_minutes';
   static const String keyShortBreakMinutes = 'setting_short_break_minutes';
   static const String keyDailyReminderEnabled = 'setting_daily_reminder_enabled';
@@ -122,6 +124,56 @@ class StorageService {
 
   int getShortBreakMinutes() => _prefs.getInt(keyShortBreakMinutes) ?? 5;
   Future<void> setShortBreakMinutes(int mins) => _prefs.setInt(keyShortBreakMinutes, mins);
+
+  // --- Exercises / Workout Persistence ---
+  List<ExerciseItem> loadExercises() {
+    final str = _prefs.getString(keyExercises);
+    if (str == null || str.isEmpty) {
+      // Default presets including Plank (60s countdown), Push-ups, Squats, Bridge
+      final presets = [
+        const ExerciseItem(
+          id: 'ex_plank',
+          name: 'Plank bụng',
+          type: ExerciseType.duration,
+          durationSeconds: 60, // 60s countdown with alarm
+        ),
+        const ExerciseItem(
+          id: 'ex_pushup',
+          name: 'Hít đất (Push up)',
+          type: ExerciseType.reps,
+          targetReps: 15,
+          targetSets: 3,
+        ),
+        const ExerciseItem(
+          id: 'ex_squat',
+          name: 'Squat chân đùi',
+          type: ExerciseType.reps,
+          targetReps: 20,
+          targetSets: 3,
+        ),
+        const ExerciseItem(
+          id: 'ex_bridge',
+          name: 'Giữ tư thế chiếc cầu (Bridge)',
+          type: ExerciseType.duration,
+          durationSeconds: 45,
+        ),
+      ];
+      saveExercises(presets);
+      return presets;
+    }
+
+    try {
+      final list = jsonDecode(str) as List;
+      return list.map((item) => ExerciseItem.fromJson(item as Map<String, dynamic>)).toList();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<void> saveExercises(List<ExerciseItem> exercises) async {
+    final list = exercises.map((e) => e.toJson()).toList();
+    await _prefs.setString(keyExercises, jsonEncode(list));
+  }
 
   bool isDailyReminderEnabled() => _prefs.getBool(keyDailyReminderEnabled) ?? true;
   Future<void> setDailyReminderEnabled(bool enabled) => _prefs.setBool(keyDailyReminderEnabled, enabled);

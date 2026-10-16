@@ -8,6 +8,7 @@ class NotificationService {
   static const int pomodoroTimerNotificationId = 2001;
   static const int dailyStreakNotificationId = 2002;
   static const int testNotificationId = 2003;
+  static const int exerciseAlarmNotificationId = 2004;
 
   static const String channelIdTimer = 'pomodoro_timer_channel';
   static const String channelNameTimer = 'Đồng hồ Pomodoro';
@@ -16,6 +17,10 @@ class NotificationService {
   static const String channelIdStreak = 'streak_reminder_channel';
   static const String channelNameStreak = 'Nhắc nhở Streak & Thú cưng';
   static const String channelDescStreak = 'Nhắc nhở duy trì chuỗi tập thể dục và học ngoại ngữ hàng ngày';
+
+  static const String channelIdExerciseAlarm = 'exercise_alarm_channel';
+  static const String channelNameExerciseAlarm = 'Báo thức bài tập (Plank)';
+  static const String channelDescExerciseAlarm = 'Báo thức rung chuông khi kết thúc bài tập đếm ngược như Plank';
 
   final FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
   bool _isInitialized = false;
@@ -143,5 +148,44 @@ class NotificationService {
   Future<void> cancelDailyReminder() async {
     if (!_isInitialized) await init();
     await _plugin.cancel(id: dailyStreakNotificationId);
+  }
+
+  /// Alarm notification for exercise countdown completion (e.g. Plank 60s)
+  Future<void> showExerciseAlarmNotification({
+    required String exerciseName,
+    required int seconds,
+  }) async {
+    if (!_isInitialized) await init();
+
+    final bigTextStyle = BigTextStyleInformation(
+      'Chúc mừng! Bạn đã giữ thành công bài tập $exerciseName trong $seconds giây!\nThú cưng Pixie nhận thêm điểm EXP thể lực và rất tự hào về bạn! 🏋️🔥',
+      contentTitle: '⏰ HẾT GIỜ: $exerciseName!',
+      summaryText: 'Báo thức thể dục',
+    );
+
+    final androidDetails = AndroidNotificationDetails(
+      channelIdExerciseAlarm,
+      channelNameExerciseAlarm,
+      channelDescription: channelDescExerciseAlarm,
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      enableVibration: true,
+      styleInformation: bigTextStyle,
+      icon: '@mipmap/ic_launcher',
+    );
+
+    const iosDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    await _plugin.show(
+      id: exerciseAlarmNotificationId,
+      title: '⏰ HẾT GIỜ BÀI TẬP: $exerciseName!',
+      body: 'Hoàn thành $exerciseName ($seconds giây)! Thú cưng nhận thêm EXP!',
+      notificationDetails: NotificationDetails(android: androidDetails, iOS: iosDetails),
+    );
   }
 }

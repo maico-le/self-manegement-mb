@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:self_management_mb/models/habit_streak_model.dart';
 import 'package:self_management_mb/models/pet_model.dart';
+import 'package:self_management_mb/models/workout_model.dart';
 
 void main() {
   group('PixelPet Evolution & EXP Tests', () {
@@ -72,6 +73,34 @@ void main() {
       expect(completed.isCompletedToday, true);
       expect(completed.currentStreak, 1);
       expect(completed.bestStreak, 1);
+    });
+  });
+
+  group('Workout ExerciseItem Tests', () {
+    test('Plank duration exercise formatting', () {
+      const plank = ExerciseItem(
+        id: 'ex_plank',
+        name: 'Plank bụng',
+        type: ExerciseType.duration,
+        durationSeconds: 60,
+      );
+
+      expect(plank.type, ExerciseType.duration);
+      expect(plank.durationSeconds, 60);
+      expect(plank.summaryLabel, '1 phút đếm ngược');
+    });
+
+    test('Push-up reps exercise formatting', () {
+      const pushup = ExerciseItem(
+        id: 'ex_pushup',
+        name: 'Hít đất',
+        type: ExerciseType.reps,
+        targetReps: 15,
+        targetSets: 3,
+      );
+
+      expect(pushup.type, ExerciseType.reps);
+      expect(pushup.summaryLabel, '15 reps x 3 hiệp');
     });
   });
 }

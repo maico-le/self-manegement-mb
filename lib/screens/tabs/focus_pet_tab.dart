@@ -7,6 +7,7 @@ import '../../providers/streak_provider.dart';
 import '../../widgets/pixel_icons.dart';
 import '../../widgets/pixel_pet_view.dart';
 import '../../widgets/pixel_widgets.dart';
+import '../workout_screen.dart';
 
 class FocusPetTab extends ConsumerWidget {
   const FocusPetTab({super.key});
@@ -191,6 +192,37 @@ class FocusPetTab extends ConsumerWidget {
                     ),
                   ],
                 ),
+                if (pomo.selectedHabitId == 'habit_fitness') ...[
+                  const SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const WorkoutScreen()));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFEF3C7),
+                        border: Border.all(color: Colors.black, width: 2),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          PixelDumbbellIcon(size: 16),
+                          SizedBox(width: 8),
+                          Text(
+                            '🏋️ Mở bài tập Plank & Reps có báo thức',
+                            style: TextStyle(
+                              fontFamily: 'monospace',
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1E1E1E),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
